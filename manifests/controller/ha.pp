@@ -482,7 +482,7 @@ class openstack_admin::controller::ha(
     exec { "/usr/sbin/crm configure location ip_on_primary clusterip_internal 100: ${hostname}":
       unless      => '/usr/sbin/crm configure show | /bin/grep ip_on_primary',
       require     => Cs_primitive['clusterip_internal'],
-      before      => Exec['initial-db-sync'],
+      before      => Exec['nova-db-sync'],
     }
 
     cs_shadow { 'openstack':
